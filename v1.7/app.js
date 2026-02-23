@@ -281,6 +281,25 @@ function applyViewMode(mode){
   else if (mode === 'mobile') root.classList.add('force-mobile');
 }
 
+// Disclaimer modal — show on first visit, remember acceptance
+function initDisclaimer(){
+  const KEY = 'obf_disclaimer_v1';
+  const overlay = $('disclaimerOverlay');
+  if (!overlay) return;
+
+  if (localStorage.getItem(KEY)) return; // already accepted — stays hidden
+
+  overlay.style.display = '';
+  document.body.style.overflow = 'hidden';
+
+  $('disclaimerAcceptBtn').addEventListener('click', () => {
+    localStorage.setItem(KEY, '1');
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+}
+
 initViewMode();
 initLang();
+initDisclaimer();
 run();

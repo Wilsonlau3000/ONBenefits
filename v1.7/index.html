@@ -3,17 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ontario Benefits Finder (Prototype)</title>
+  <title>Ontario Benefits Finder</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <!-- Legal disclaimer modal — hidden inline to prevent flash for returning visitors -->
+  <div id="disclaimerOverlay" class="disclaimer-overlay" style="display:none">
+    <div class="disclaimer-modal">
+      <div class="disclaimer-modal-header" data-i18n="disclaimerModalTitle">Important Legal Disclaimer</div>
+      <div class="disclaimer-modal-body" data-i18n="disclaimerModalBody">Before using this tool, please read and acknowledge the following:
+
+<strong>Not a Government Service</strong>
+This is an independent educational prototype. It is not affiliated with, endorsed by, or connected to any government of Ontario agency, the Government of Canada, or any official benefits provider.
+
+<strong>Not Professional Advice</strong>
+Nothing in this tool constitutes legal, financial, tax, or professional advice. Do not rely on it for making important decisions without consulting qualified professionals.
+
+<strong>No Guarantee of Accuracy</strong>
+The eligibility rules used here are simplified approximations of complex government programs. They may be incomplete, outdated, or inaccurate. Actual eligibility depends on many factors not captured by this tool.
+
+<strong>No Warranty &amp; Limitation of Liability</strong>
+This tool is provided "as is" without any warranty, express or implied. The creators and contributors accept no liability for any loss, damage, or consequence arising from the use of or reliance on this tool.
+
+<strong>Always Verify Officially</strong>
+You must verify your eligibility and apply through official government websites and authorized service providers. Links provided are for reference only.
+
+<strong>Your Privacy</strong>
+All data you enter stays entirely in your browser (localStorage). Nothing is transmitted to any server or third party.</div>
+      <div class="disclaimer-modal-footer">
+        <button id="disclaimerAcceptBtn" data-i18n="disclaimerAcceptBtn">I Understand and Agree</button>
+      </div>
+    </div>
+  </div>
+
   <header class="app-header">
     <div class="container">
       <div class="header-row">
         <div>
-          <h1 data-i18n="appTitle">Ontario Benefits Finder <span class="pill">Prototype</span></h1>
+          <h1 data-i18n="appTitle">Ontario Benefits Finder</h1>
           <p class="sub" data-i18n="appSubtitle">
-            Hardcoded client-side matching engine (no backend). Educational tool only — not legal advice.
+            Educational tool only — not legal advice.
           </p>
         </div>
         <div class="lang">
@@ -401,8 +430,7 @@
     <section class="card">
       <h2 data-i18n="disclaimerTitle">Disclaimer</h2>
       <p data-i18n="disclaimerBody">
-        This prototype uses simplified, hardcoded rules and may be incomplete or outdated.
-        Always verify eligibility and apply using official government sources.
+        This tool is an independent educational prototype and is not affiliated with, endorsed by, or connected to any government agency or official benefits provider. It does not constitute legal, financial, or professional advice. The eligibility rules used are simplified approximations that may be incomplete, outdated, or inaccurate. This tool is provided "as is" without any warranty. The creators accept no liability for decisions made based on its output. Always verify your eligibility and apply through official government sources. All data you enter stays in your browser — nothing is sent to any server.
       </p>
     </section>
   </main>
