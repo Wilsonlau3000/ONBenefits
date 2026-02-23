@@ -98,7 +98,9 @@ const I18N = {
     ynUnknownOptions: { yes: "Yes", no: "No", unknown: "Not sure" },
     studentApprenticeOptions: { none: "No", student: "Post-secondary student", apprentice: "Registered apprentice" },
     filterOptions: { all: "All", eligible: "Eligible", possible: "Possibly eligible", needs: "Needs info", not: "Not eligible" },
-    sortOptions: { status: "Status", category: "Category", name: "Name" }
+    sortOptions: { status: "Status", category: "Category", name: "Name" },
+    viewLabel: "View",
+    viewOptions: { auto: "Auto", desktop: "Desktop", mobile: "Mobile" }
   },
   "zh-Hans": {
     appTitle: "安省福利查询 <span class=\"pill\">原型</span>",
@@ -195,7 +197,9 @@ const I18N = {
     ynUnknownOptions: { yes: "是", no: "否", unknown: "不确定" },
     studentApprenticeOptions: { none: "否", student: "大专/大学学生", apprentice: "注册学徒" },
     filterOptions: { all: "全部", eligible: "符合", possible: "可能符合", needs: "需补充信息", not: "不符合" },
-    sortOptions: { status: "按状态", category: "按类别", name: "按名称" }
+    sortOptions: { status: "按状态", category: "按类别", name: "按名称" },
+    viewLabel: "视图",
+    viewOptions: { auto: "自动", desktop: "桌面版", mobile: "手机版" }
   }
 };
 

@@ -51,8 +51,64 @@ h1{margin:0; font-size:28px; letter-spacing:.2px}
 }
 @media (max-width: 600px){
   .grid{grid-template-columns: 1fr;}
-  .lang{align-items:flex-start}
+  .container{padding:10px}
+  h1{font-size:20px}
+  .sub{font-size:13px}
+  .header-row{flex-direction:column; gap:10px}
+  .lang{flex-direction:row; align-items:center; flex-wrap:wrap; gap:8px}
+  input, select{padding:12px 14px; font-size:16px}
+  button{padding:12px 16px; font-size:15px}
+  .actions{flex-direction:column}
+  .actions button{width:100%}
+  .row{flex-direction:column; align-items:stretch; gap:8px}
+  .row-right{flex-direction:column; width:100%}
+  .row-right select{width:100%}
+  .card{padding:14px; border-radius:14px; margin:10px 0}
+  .result{padding:14px}
+  .topline{flex-direction:column; gap:6px}
+  .links{flex-direction:column; gap:8px}
+  .mini select{width:100%; font-size:15px; padding:10px}
 }
+
+/* Force desktop — undo mobile styles on small screens */
+html.force-desktop .grid{grid-template-columns: repeat(3, minmax(0, 1fr)) !important}
+html.force-desktop .container{padding:18px}
+html.force-desktop h1{font-size:28px}
+html.force-desktop .sub{font-size:inherit}
+html.force-desktop .header-row{flex-direction:row}
+html.force-desktop .lang{flex-direction:column; align-items:flex-end; gap:6px}
+html.force-desktop input, html.force-desktop select{padding:10px 12px; font-size:inherit}
+html.force-desktop button{padding:10px 12px; font-size:inherit; width:auto}
+html.force-desktop .actions{flex-direction:row}
+html.force-desktop .actions button{width:auto}
+html.force-desktop .row{flex-direction:row; align-items:center}
+html.force-desktop .row-right{flex-direction:row; width:auto}
+html.force-desktop .row-right select{width:auto}
+html.force-desktop .card{padding:16px; border-radius:18px; margin:16px 0}
+html.force-desktop .result{padding:12px}
+html.force-desktop .topline{flex-direction:row}
+html.force-desktop .links{flex-direction:row}
+html.force-desktop .mini select{width:auto; font-size:12px; padding:8px 10px}
+
+/* Force mobile — apply mobile layout on any screen */
+html.force-mobile .grid{grid-template-columns: 1fr !important}
+html.force-mobile .container{padding:10px}
+html.force-mobile h1{font-size:20px}
+html.force-mobile .sub{font-size:13px}
+html.force-mobile .header-row{flex-direction:column; gap:10px}
+html.force-mobile .lang{flex-direction:row; align-items:center; flex-wrap:wrap; gap:8px}
+html.force-mobile input, html.force-mobile select{padding:12px 14px; font-size:16px}
+html.force-mobile button{padding:12px 16px; font-size:15px}
+html.force-mobile .actions{flex-direction:column}
+html.force-mobile .actions button{width:100%}
+html.force-mobile .row{flex-direction:column; align-items:stretch; gap:8px}
+html.force-mobile .row-right{flex-direction:column; width:100%}
+html.force-mobile .row-right select{width:100%}
+html.force-mobile .card{padding:14px; border-radius:14px; margin:10px 0}
+html.force-mobile .result{padding:14px}
+html.force-mobile .topline{flex-direction:column; gap:6px}
+html.force-mobile .links{flex-direction:column; gap:8px}
+html.force-mobile .mini select{width:100%; font-size:15px; padding:10px}
 .field{display:flex; flex-direction:column; gap:6px}
 .field span{font-size:12px; color:var(--muted)}
 input, select{

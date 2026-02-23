@@ -260,5 +260,27 @@ $('householdType').addEventListener('change', () => {
 
 $('buildDate').textContent = new Date().toISOString().slice(0,10);
 
+// View mode toggle (auto / desktop / mobile)
+function initViewMode(){
+  const sel = $('viewMode');
+  const saved = localStorage.getItem('obf_view') || 'auto';
+  sel.value = saved;
+  applyViewMode(saved);
+
+  sel.addEventListener('change', () => {
+    const mode = sel.value;
+    localStorage.setItem('obf_view', mode);
+    applyViewMode(mode);
+  });
+}
+
+function applyViewMode(mode){
+  const root = document.documentElement;
+  root.classList.remove('force-desktop', 'force-mobile');
+  if (mode === 'desktop') root.classList.add('force-desktop');
+  else if (mode === 'mobile') root.classList.add('force-mobile');
+}
+
+initViewMode();
 initLang();
 run();
