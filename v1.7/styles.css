@@ -31,6 +31,7 @@ h1{margin:0; font-size:28px; letter-spacing:.2px}
 .pill{font-size:12px; padding:3px 8px; border:1px solid var(--border); border-radius:999px; color:var(--muted); vertical-align:middle; margin-left:8px}
 .lang{display:flex; flex-direction:column; gap:6px; min-width:160px; align-items:flex-end}
 .lang select{width:160px}
+.lang-pair{display:flex; flex-direction:column; gap:6px; align-items:flex-end}
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   border:1px solid var(--border);
@@ -56,6 +57,7 @@ h1{margin:0; font-size:28px; letter-spacing:.2px}
   .sub{font-size:13px}
   .header-row{flex-direction:column; gap:10px}
   .lang{flex-direction:row; align-items:center; flex-wrap:wrap; gap:8px}
+  .lang-pair{flex-direction:row; align-items:center; gap:8px}
   input, select{padding:12px 14px; font-size:16px}
   button{padding:12px 16px; font-size:15px}
   .actions{flex-direction:column}
@@ -77,6 +79,7 @@ html.force-desktop h1{font-size:28px}
 html.force-desktop .sub{font-size:inherit}
 html.force-desktop .header-row{flex-direction:row}
 html.force-desktop .lang{flex-direction:column; align-items:flex-end; gap:6px}
+html.force-desktop .lang-pair{flex-direction:column; align-items:flex-end; gap:6px}
 html.force-desktop input, html.force-desktop select{padding:10px 12px; font-size:inherit}
 html.force-desktop button{padding:10px 12px; font-size:inherit; width:auto}
 html.force-desktop .actions{flex-direction:row}
@@ -97,6 +100,7 @@ html.force-mobile h1{font-size:20px}
 html.force-mobile .sub{font-size:13px}
 html.force-mobile .header-row{flex-direction:column; gap:10px}
 html.force-mobile .lang{flex-direction:row; align-items:center; flex-wrap:wrap; gap:8px}
+html.force-mobile .lang-pair{flex-direction:row; align-items:center; gap:8px}
 html.force-mobile input, html.force-mobile select{padding:12px 14px; font-size:16px}
 html.force-mobile button{padding:12px 16px; font-size:15px}
 html.force-mobile .actions{flex-direction:column}
@@ -109,8 +113,9 @@ html.force-mobile .result{padding:14px}
 html.force-mobile .topline{flex-direction:column; gap:6px}
 html.force-mobile .links{flex-direction:column; gap:8px}
 html.force-mobile .mini select{width:100%; font-size:15px; padding:10px}
-.field{display:flex; flex-direction:column; gap:6px}
+.field{display:flex; flex-direction:column; gap:6px; min-width:0}
 .field span{font-size:12px; color:var(--muted)}
+.field input, .field select{width:100%; min-width:0}
 input, select{
   background:#1a2236;
   border:1px solid var(--border);
