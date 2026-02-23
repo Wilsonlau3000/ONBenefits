@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ontario Benefits Finder (Prototype)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <div class="header-row">
+        <div>
+          <h1 data-i18n="appTitle">Ontario Benefits Finder <span class="pill">Prototype</span></h1>
+          <p class="sub" data-i18n="appSubtitle">
+            Hardcoded client-side matching engine (no backend). Educational tool only — not legal advice.
+          </p>
+        </div>
+        <div class="lang">
+          <label class="mini" for="langSelect" data-i18n="languageLabel">Language</label>
+          <select id="langSelect" aria-label="Language">
+            <option value="en">English</option>
+            <option value="zh-Hans">简体中文</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 data-i18n="step1Title">1) Quick profile</h2>
+      <p class="hint" data-i18n="step1Hint">Answer what you can. If something is unknown, leave it blank — the engine will mark “Needs info”.</p>
+
+      <div class="grid">
+        <label class="field">
+          <span data-i18n="q_householdType">Household type</span>
+          <select id="householdType" data-i18n-options="householdTypeOptions">
+            <option value="single">Single (no children)</option>
+            <option value="couple">Couple (no children)</option>
+            <option value="single_parent">Single parent</option>
+            <option value="couple_kids">Couple with children</option>
+            <option value="multi_adult">Multi-adult household (roommates / extended family)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_adultCount">Adults (count)</span>
+          <input id="adultCount" type="number" min="1" step="1" value="1" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_childCount">Children under 18 (count)</span>
+          <input id="childCount" type="number" min="0" step="1" value="0" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_oldestAdultAge">Oldest adult age</span>
+          <input id="oldestAdultAge" type="number" min="0" step="1" placeholder="e.g., 72" data-i18n-placeholder="ph_oldestAdultAge" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_youngestChildAge">Youngest child age (if any)</span>
+          <input id="youngestChildAge" type="number" min="0" step="1" placeholder="e.g., 4" data-i18n-placeholder="ph_youngestChildAge" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_incomeGross">Annual household income (before tax, CAD)</span>
+          <input id="incomeGross" type="number" min="0" step="100" placeholder="e.g., 45000" data-i18n-placeholder="ph_incomeGross" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_incomeNet">Annual household income (after tax, CAD)</span>
+          <input id="incomeNet" type="number" min="0" step="100" placeholder="optional; helps OESP/LEAP" data-i18n-placeholder="ph_incomeNet" />
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_housing">Housing</span>
+          <select id="housing" data-i18n-options="housingOptions">
+            <option value="rent">Rent</option>
+            <option value="own">Own</option>
+            <option value="reserve">On-reserve</option>
+            <option value="ltc">Long-term care</option>
+            <option value="other">Other / unsure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_hasElectricityAccount">Has electricity account in your name/household?</span>
+          <select id="hasElectricityAccount" data-i18n-options="ynUnknownOptions">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_hasArrears">Overdue electricity/gas bill (arrears / disconnection risk)?</span>
+          <select id="hasArrears" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_heatedByElectricity">Is your home heated primarily by electricity?</span>
+          <select id="heatedByElectricity" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_hasDisability">Disability (self-reported)</span>
+          <select id="hasDisability" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_dtcApproved">Disability Tax Credit (DTC) approved?</span>
+          <select id="dtcApproved" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_studentApprentice">Student / apprentice?</span>
+          <select id="studentApprentice" data-i18n-options="studentApprenticeOptions">
+            <option value="none">No</option>
+            <option value="student">Post-secondary student</option>
+            <option value="apprentice">Registered apprentice</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_taxFiled">Filed last year’s tax return?</span>
+          <select id="taxFiled" data-i18n-options="ynUnknownOptions">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_hasPrivateDental">Has private dental coverage?</span>
+          <select id="hasPrivateDental" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <!-- New: charity / community supports -->
+        <label class="field">
+          <span data-i18n="q_locationRegion">Where in Ontario?</span>
+          <select id="locationRegion" data-i18n-options="locationRegionOptions">
+            <option value="unknown">Not sure</option>
+            <option value="gtha">GTA (Toronto + surrounding)</option>
+            <option value="ottawa">Ottawa</option>
+            <option value="london">London</option>
+            <option value="hamilton">Hamilton</option>
+            <option value="kingston">Kingston</option>
+            <option value="york">York Region</option>
+            <option value="north">Northern Ontario</option>
+            <option value="other">Other Ontario</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_urgentNeedFood">Need food help right now?</span>
+          <select id="urgentNeedFood" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_urgentNeedHousing">At risk of homelessness / need housing or shelter help?</span>
+          <select id="urgentNeedHousing" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_urgentNeedUtilities">Need help with overdue utility bills?</span>
+          <select id="urgentNeedUtilities" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_urgentNeedFurniture">Need basic furniture (bed/sofa/table) after moving/shelter?</span>
+          <select id="urgentNeedFurniture" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_urgentNeedMedicalTravel">Need help with medical travel/parking/equipment?</span>
+          <select id="urgentNeedMedicalTravel" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_domesticViolence">Experiencing domestic violence / need safety support?</span>
+          <select id="domesticViolence" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_newcomerRefugee">Newcomer / refugee claimant?</span>
+          <select id="newcomerRefugee" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_needsMealsDelivery">Senior who needs meal delivery?</span>
+          <select id="needsMealsDelivery" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_needsKidsSports">Need help paying for kids’ sports / activities?</span>
+          <select id="needsKidsSports" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_needsMicroloanTraining">Need a small loan for training / employment / starting a small business?</span>
+          <select id="needsMicroloanTraining" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <!-- Specialized / expanded benefit questions -->
+        <label class="field">
+          <span data-i18n="q_unionMember">Union member (e.g., OPSEU)?</span>
+          <select id="unionMember" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_rbcmortgage">RBC mortgage holder?</span>
+          <select id="rbcmortgage" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_alectraCustomer">Alectra Utilities customer?</span>
+          <select id="alectraCustomer" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_kidneyDialysis">Require kidney dialysis?</span>
+          <select id="kidneyDialysis" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_longDistanceMedicalTravel">Need long-distance travel for medical care?</span>
+          <select id="longDistanceMedicalTravel" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_musicProfessional">Work in the music industry?</span>
+          <select id="musicProfessional" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_artistProfessional">Professional artist?</span>
+          <select id="artistProfessional" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_churchMember">Church / faith community member?</span>
+          <select id="churchMember" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_reintegration">Reintegrating after incarceration?</span>
+          <select id="reintegration" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="q_survivorAbuse">Survivor of abuse / trafficking?</span>
+          <select id="survivorAbuse" data-i18n-options="ynUnknownOptions">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="unknown">Not sure</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="runBtn" class="primary" data-i18n="btnFind">Find benefits</button>
+        <button id="resetBtn" class="ghost" data-i18n="btnReset">Reset</button>
+        <button id="saveBtn" class="ghost" data-i18n="btnSave">Save profile</button>
+        <button id="loadBtn" class="ghost" data-i18n="btnLoad">Load saved</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2 data-i18n="step2Title">2) Results</h2>
+        <div class="row-right">
+          <label class="mini">
+            <span data-i18n="filterLabel">Filter</span>:
+            <select id="filterStatus" data-i18n-options="filterOptions">
+              <option value="all">All</option>
+              <option value="eligible">Eligible</option>
+              <option value="possible">Possibly eligible</option>
+              <option value="needs">Needs info</option>
+              <option value="not">Not eligible</option>
+            </select>
+          </label>
+          <label class="mini">
+            <span data-i18n="sortLabel">Sort</span>:
+            <select id="sortBy" data-i18n-options="sortOptions">
+              <option value="status">Status</option>
+              <option value="category">Category</option>
+              <option value="name">Name</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div id="summary" class="summary"></div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="disclaimerTitle">Disclaimer</h2>
+      <p data-i18n="disclaimerBody">
+        This prototype uses simplified, hardcoded rules and may be incomplete or outdated.
+        Always verify eligibility and apply using official government sources.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small><span data-i18n="buildLabel">Prototype build</span>: <span id="buildDate"></span></small>
+    </div>
+  </footer>
+
+  <script src="./i18n.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
